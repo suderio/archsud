@@ -22,7 +22,6 @@ RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim 
 # SSH (move pkgfile to previous line)
 RUN pacman -Syu --noconfirm --noprogressbar openssh
 RUN echo -e "AllowUsers hoot\nAllowGroups hoot\n" >> /etc/ssh/sshd_config
-RUN  /usr/bin/ssh-keygen -A
 EXPOSE 22
 
 # Add devel user to build aur packages
