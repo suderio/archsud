@@ -22,6 +22,7 @@ RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim 
 # SSH (move pkgfile to previous line)
 RUN pacman -Syu --noconfirm --noprogressbar openssh
 RUN echo -e "AllowUsers hoot\nAllowGroups hoot\n" >> /etc/ssh/sshd_config
+RUN ssh-keygen -A
 EXPOSE 22
 
 # Add devel user to build aur packages
@@ -51,6 +52,6 @@ ENV USER hoot
 RUN yadm clone http://github.com/suderio/dotfiles.git
 ENV TERM screen-256color
 RUN sed -i '$ d' .bashrc
-CMD /usr/sbin/sshd -D
+CMD sudo /usr/sbin/sshd -D
 
 
