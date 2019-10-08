@@ -12,15 +12,15 @@ ENV LANGUAGE pt_BR:pt:en_US:en
 ENV LC_ALL pt_BR.UTF-8
 
 # Configure proxy
-ARG proxy=http://proxy01.bndes.net:8080
+ARG proxy
 ENV HTTP_PROXY=$proxy HTTPS_PROXY=$proxy NO_PROXY=$no_proxy http_proxy=$proxy https_proxy=$proxy no_proxy=localhost,127.0.0.1
 
 # Update base system
 RUN pacman -Syyuu --noconfirm --noprogressbar
-RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim htop tmux python2 python3 python-neovim ant maven gradle julia julia-docs ed lua kotlin clojure ruby nodejs colordiff yarn
+RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim htop tmux python2 python3 python-neovim ant maven gradle julia julia-docs ed lua kotlin clojure ruby nodejs colordiff yarn pacman-contrib lynx transmission-cli weechat ghostscript pandoc mc aspell cabextract cvs mtools p7zip samba unace unarj unrar zip hub flex byacc bison antlr4 pkgfile
 
 # SSH (move pkgfile to previous line)
-RUN pacman -Syu --noconfirm --noprogressbar openssh pkgfile
+RUN pacman -Syu --noconfirm --noprogressbar openssh
 RUN echo -e "AllowUsers hoot\nAllowGroups hoot\nPort 4242" >> /etc/ssh/sshd_config
 RUN systemctl enable sshd.service
 
@@ -49,5 +49,6 @@ ENV USER hoot
 RUN yadm clone http://github.com/suderio/dotfiles.git
 ENV TERM screen-256color
 RUN sed -i '$ d' .bashrc
-CMD tmux new-session -A -s hoot
+CMD sleep infinity
+
 
