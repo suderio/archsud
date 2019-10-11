@@ -17,7 +17,7 @@ ENV HTTP_PROXY=$proxy HTTPS_PROXY=$proxy NO_PROXY=$no_proxy http_proxy=$proxy ht
 
 # Update base system
 RUN pacman -Syyuu --noconfirm --noprogressbar
-RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim tmux python3 python-setuptools python-pip python-neovim ant maven gradle kotlin clojure ruby ruby-docs nodejs colordiff yarn ghostscript pandoc p7zip hub flex byacc bison antlr4 pkgfile mlocate texlive-core pandoc-citeproc pandoc-crossref inetutils
+RUN pacman -Syu --noconfirm --noprogressbar base-devel sudo git wget zip neovim colordiff ghostscript pandoc pkgfile texlive-core pandoc-citeproc pandoc-crossref 
 
 # SSH (move pkgfile to previous line)
 RUN pacman -Syu --noconfirm --noprogressbar openssh
@@ -38,8 +38,6 @@ RUN git clone https://aur.archlinux.org/yadm-git.git /tmp/yadm \
   && cd /tmp/yadm \
   && makepkg -sfi --skippgpcheck --noconfirm 
 # Install neovim
-RUN gem install neovim
-RUN yarn global add neovim
 
 USER root
 
